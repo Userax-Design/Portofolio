@@ -25,3 +25,31 @@ const menu = document.querySelector(".nav-menu");
 hamburger.onclick = () => {
   menu.classList.toggle("active");
 };
+
+document.addEventListener("click", function (e) {
+  if (!hamburger.contains(e.target) && !menu.contains(e.target)) {
+    menu.classList.remove("active");
+  }
+});
+
+// active section
+
+const sections = document.querySelector("section");
+const menuAnchor = document.querySelector(".nav-menu li a");
+console.log(sections);
+window.addEventListener("scroll", () => {
+  let current = "";
+  sections.forEach((section) => {
+    const sectionTop = section.offsetTop;
+    if (pageYOffset > sectionTop) {
+      current = section.getAttribute("id");
+    }
+    console.log(current);
+  });
+  menuAnchor.forEach((a) => {
+    a.classList.remove("active");
+    if (a.classList.contains(current)) {
+      a.classList.add("active");
+    }
+  });
+});
